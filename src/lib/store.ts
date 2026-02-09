@@ -143,6 +143,21 @@ export const useAppStore = create<AppState>()(
         set((s) => ({
           papers: s.papers.filter((p) => p.id !== id),
           selectedPaperId: s.selectedPaperId === id ? null : s.selectedPaperId,
+          // Clean up related data
+          concepts: s.concepts.filter((c) => !c.paperIds.includes(id)),
+          edges: s.edges.filter(
+            (e) => !s.concepts.find((c) => c.id === e.source || c.id === e.target)?.paperIds.includes(id)
+          ),
+          synthesis: s.synthesis
+            ? {
+                ...s.synthesis,
+                paperIds: s.synthesis.paperIds.filter((pid) => pid !== id),
+                connections: s.synthesis.connections.filter((c) => !c.paperIds.includes(id)),
+                contradictions: s.synthesis.contradictions.filter((c) => !c.paperIds.includes(id)),
+              }
+            : null,
+          // Clear messages if no papers remain
+          messages: s.papers.length <= 1 ? [] : s.messages,
         })),
       selectedPaperId: null,
       setSelectedPaper: (id) => set({ selectedPaperId: id }),
