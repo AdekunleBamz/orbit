@@ -133,7 +133,7 @@ This isn't a chat wrapper. Gemini 3 is the core engine for every feature:
 ## Run It Locally
 
 ```bash
-git clone https://github.com/AstroLabs-AI/orbit.git
+git clone https://github.com/AdekunleBamz/orbit.git
 cd orbit
 npm install
 echo "GEMINI_API_KEY=your_key_here" > .env.local
