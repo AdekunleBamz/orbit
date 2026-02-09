@@ -104,6 +104,7 @@ interface AppState {
   edges: ConceptEdge[];
   setConcepts: (concepts: Concept[]) => void;
   setEdges: (edges: ConceptEdge[]) => void;
+  clearGraph: () => void;
 
   // Chat
   messages: ChatMessage[];
@@ -167,6 +168,7 @@ export const useAppStore = create<AppState>()(
       edges: [],
       setConcepts: (concepts) => set({ concepts }),
       setEdges: (edges) => set({ edges }),
+      clearGraph: () => set({ concepts: [], edges: [] }),
 
       // Chat
       messages: [],

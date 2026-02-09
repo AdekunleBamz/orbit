@@ -15,7 +15,7 @@ import {
 import "@xyflow/react/dist/style.css";
 import dagre from "dagre";
 import { motion } from "framer-motion";
-import { Network, Info } from "lucide-react";
+import { Network, Info, Trash2 } from "lucide-react";
 import { useAppStore } from "@/lib/store";
 import { getConceptColor } from "@/lib/utils";
 
@@ -53,7 +53,7 @@ function getLayoutedElements(
 }
 
 export default function KnowledgeGraph() {
-  const { concepts, edges: conceptEdges, papers, setView } = useAppStore();
+  const { concepts, edges: conceptEdges, papers, setView, clearGraph } = useAppStore();
 
   const [nodes, setNodes, onNodesChange] = useNodesState([] as Node[]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([] as Edge[]);
@@ -156,6 +156,16 @@ export default function KnowledgeGraph() {
             </p>
           </div>
           <div className="flex items-center gap-4">
+            {/* Clear Graph Button */}
+            <button
+              onClick={clearGraph}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-red-500/10 text-red-400 text-xs font-medium hover:bg-red-500/20 transition-colors border border-red-500/20"
+              title="Clear the entire knowledge graph"
+            >
+              <Trash2 className="w-3.5 h-3.5" />
+              Clear Graph
+            </button>
+            
             {/* Legend */}
             <div className="flex items-center gap-3 text-xs">
               {["method", "finding", "theory", "data", "metric", "tool"].map(
