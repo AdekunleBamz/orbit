@@ -40,7 +40,7 @@ ORBIT is a research intelligence tool powered by **Gemini 3**. You upload PDFs, 
 
 ## Demo
 
-🎥 **[Watch the demo video](TODO)** (~3 minutes)
+🎥 **[Watch the demo video](https://youtu.be/SAxc2XTS5Lw)** (~3 minutes)
 
 🌐 **[Try the live demo](https://gemini-orbit.vercel.app)**
 
