@@ -124,6 +124,11 @@ interface AppState {
   setIsProcessing: (v: boolean) => void;
   apiKeySet: boolean;
   setApiKeySet: (v: boolean) => void;
+
+  // Utility functions
+  getPaperById: (id: string) => Paper | undefined;
+  getPapersByStatus: (status: Paper["status"]) => Paper[];
+  clearAllData: () => void;
 }
 
 export const useAppStore = create<AppState>()(
@@ -188,6 +193,25 @@ export const useAppStore = create<AppState>()(
       setIsProcessing: (v) => set({ isProcessing: v }),
       apiKeySet: false,
       setApiKeySet: (v) => set({ apiKeySet: v }),
+
+      // Utility functions implementation
+      getPaperById: (id: string) => {
+        const state = useAppStore.getState();
+        return state.papers.find((p: Paper) => p.id === id);
+      },
+      getPapersByStatus: (status: Paper["status"]) => {
+        const state = useAppStore.getState();
+        return state.papers.filter((p: Paper) => p.status === status);
+      },
+      clearAllData: () => set({
+        papers: [],
+        concepts: [],
+        edges: [],
+        messages: [],
+        synthesis: null,
+        selectedPaperId: null,
+        currentView: "landing",
+      }),
     }),
     {
       name: "orbit-storage",
